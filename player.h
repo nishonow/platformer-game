@@ -118,6 +118,7 @@ void update_player() {
             load_level(1);
             PlaySound(exit_sound);
         } else if (level_index == 0 && player_score <= 10) {
+            show_not_enough_money_screen();
             load_level();
         } else if (level_index == 1 && player_score <= 60) {
             show_not_enough_money_screen();
