@@ -38,13 +38,13 @@ void show_not_enough_money_screen() {
         StopSound(music);
     }
     PlaySound(music);
-
 }
 
 void dead_screen() {
     ClearBackground(BLACK);
     draw_text(dead);
     EndDrawing();
+    StopSound(music);
     PlaySound(death_sound);
 
     while (!IsKeyPressed(KEY_ENTER)) {
@@ -52,11 +52,10 @@ void dead_screen() {
         ClearBackground(BLACK);
         draw_text(dead);
         EndDrawing();
-
     }
-
     game_state = MENU_STATE;
     level_index = 0;
+    load_level(0);
     player_score = 0;
 }
 
@@ -75,7 +74,6 @@ void show_victory_screen() {
         draw_victory_menu();
         EndDrawing();
         StopSound(music);
-
     }
 
     game_state = MENU_STATE;
@@ -117,9 +115,10 @@ void update_player() {
             load_level(1);
             PlaySound(exit_sound);
         } else if (level_index == 3 && player_score >= 190) {
-            show_victory_screen();
-            level_index = 0;
-            player_score = 0;
+            load_level(1);
+            PlaySound(exit_sound);
+        } else if (level_index == 0 && player_score <= 10) {
+            load_level();
         } else if (level_index == 1 && player_score <= 60) {
             show_not_enough_money_screen();
             load_level();

@@ -31,10 +31,11 @@ void derive_graphics_metrics_from_loaded_level() {
     shift_to_center.y = (screen_size.y - level_height) * 0.5f;
 }
 
-// void draw_menu() {
-//     draw_text(game_title);
-//     draw_text(game_subtitle);
-// }
+void draw_menu() {
+    draw_text(menu_title);
+    draw_text(menu_option_start);
+    draw_text(menu_option_how_to_play);
+}
 
 void draw_game_overlay() {
     Text score = {
@@ -114,10 +115,10 @@ void create_victory_menu_background() {
         ball.y  = rand_up_to(screen_size.y);
         ball.dx = rand_from_to(-VICTORY_BALL_MAX_SPEED, VICTORY_BALL_MAX_SPEED);
         ball.dx *= screen_scale;
-        if (abs(ball.dx) < 0E-1) ball.dx = 1.0f;
+        //if (abs(ball.dx) < 0E-1) ball.dx = 1.0f;
         ball.dy = rand_from_to(-VICTORY_BALL_MAX_SPEED, VICTORY_BALL_MAX_SPEED);
         ball.dy *= screen_scale;
-        if (abs(ball.dy) < 0E-1) ball.dy = 1.0f;
+        //if (abs(ball.dy) < 0E-1) ball.dy = 1.0f;
         ball.radius = rand_from_to(VICTORY_BALL_MIN_RADIUS, VICTORY_BALL_MAX_RADIUS);
         ball.radius *= screen_scale;
     }

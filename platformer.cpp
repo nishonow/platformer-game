@@ -7,38 +7,101 @@
 #include "assets.h"
 #include "utilities.h"
 
-void update_game() {
+void update_game()
+{
     game_frame++;
 
+    switch (game_state) {
     // TODO
+    case MENU_STATE:
+        if (IsKeyPressed(KEY_H)) {
+            game_state = HOW_STATE;
+        }
+        if (IsKeyPressed(KEY_ENTER)) {
+            game_state = GAME_STATE;
+            PlaySound(music);
+        }
+        break;
+    case GAME_STATE:
+        if (IsKeyPressed(KEY_ESCAPE)) {
+            game_state = PAUSE_STATE;
+            StopSound(music);
+        }
+        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+            move_player_horizontally(MOVEMENT_SPEED);
+        }
 
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+            move_player_horizontally(-MOVEMENT_SPEED);
+        }
 
-    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-        move_player_horizontally(MOVEMENT_SPEED);
+        // Calculating collisions to decide whether the player is allowed to jump: don't want them to suction cup to the ceiling or jump midair
+        is_player_on_ground = is_colliding({player_pos.x, player_pos.y + 0.1f}, WALL);
+        if ((IsKeyDown(KEY_UP) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) && is_player_on_ground) {
+            player_y_velocity = -JUMP_STRENGTH;
+        }
+
+        update_player();
+        break;
+
+    case PAUSE_STATE:
+        if (IsKeyDown(KEY_ESCAPE)) {
+            game_state = PAUSE_STATE;
+        }
+        if (IsKeyPressed(KEY_ESCAPE)) {
+            game_state = GAME_STATE;
+            PlaySound(music);
+        }
+        break;
+
+    case VICTORY_STATE:
+        StopSound(music);
+        if (IsKeyPressed(KEY_ENTER)) {
+            game_state = MENU_STATE;
+            StopSound(music);
+        }
+        break;
+    case HOW_STATE:
+        if (IsKeyPressed(KEY_B)) {
+            game_state = MENU_STATE;
+        }
+        break;
     }
 
-    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
-        move_player_horizontally(-MOVEMENT_SPEED);
-    }
 
-
-    is_player_on_ground = is_colliding({player_pos.x, player_pos.y + 0.1f}, WALL);
-    if ((IsKeyDown(KEY_UP) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) && is_player_on_ground) {
-        player_y_velocity = -JUMP_STRENGTH;
-    }
-
-    update_player();
 }
 
-void draw_game() {
-    // TODO
-
-    ClearBackground(BLACK);
-    draw_level();
-    draw_game_overlay();
+void draw_game()
+{
+    switch (game_state) {
+        // TODO
+        case MENU_STATE:
+            ClearBackground(BLACK);
+            draw_menu();
+            break;
+        case GAME_STATE:
+            ClearBackground(BLACK);
+            draw_level();
+            draw_game_overlay();
+            break;
+        case PAUSE_STATE:
+            ClearBackground(BLACK);
+            draw_pause_menu();
+            break;
+        case VICTORY_STATE:
+            draw_victory_menu();
+            break;
+        case HOW_STATE:
+            ClearBackground(BLACK);
+            draw_text(how_to_play_title);
+            draw_text(how_to_play_instructions);
+            draw_text(how_to_play_back);
+            break;
+    }
 }
 
-int main() {
+int main()
+{
     InitWindow(1024, 480, "Platformer");
     SetExitKey(0);
     SetTargetFPS(60);
@@ -48,52 +111,15 @@ int main() {
     load_sounds();
     load_level();
 
-
-    while (!WindowShouldClose()) {
+    while (!WindowShouldClose())
+    {
         BeginDrawing();
-        ClearBackground(BLACK);
 
-
-        if (IsKeyPressed(KEY_H)) {
-            game_state = HOW_STATE;
-        }
-
-        if (game_state == MENU_STATE) {
-            if (IsKeyPressed(KEY_ENTER)) {
-                game_state = GAME_STATE;
-                PlaySound(music);
-                load_level(0);
-            } else if (IsKeyPressed(KEY_H)) {
-                game_state = HOW_STATE;
-            }
-            draw_text(menu_title);
-            draw_text(menu_option_start);
-            draw_text(menu_option_how_to_play);
-        } else if (game_state == HOW_STATE) {
-            if (IsKeyPressed(KEY_B)) {
-                game_state = MENU_STATE;
-            }
-            draw_text(how_to_play_title);
-            draw_text(how_to_play_instructions);
-            draw_text(how_to_play_back);
-        } else if (game_state == PAUSE_STATE) {
-            ClearBackground(BLACK);
-            draw_pause_menu();
-            if (IsKeyPressed(KEY_ESCAPE)) {
-                game_state = GAME_STATE;
-            }
-        } else if (game_state == GAME_STATE) {
-            update_game();
-            draw_game();
-            if (IsKeyPressed(KEY_ESCAPE)) {
-                game_state = PAUSE_STATE;
-            }
-        }
+        update_game();
+        draw_game();
 
         EndDrawing();
     }
-
-
 
     unload_level();
     unload_sounds();
