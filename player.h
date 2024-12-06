@@ -109,10 +109,13 @@ void update_player() {
     if (is_colliding(player_pos, EXIT)) {
         if (level_index == 0 && player_score >= 10) {
             load_level(1);
+            PlaySound(exit_sound);
         } else if(level_index == 1 && player_score >= 60) {
             load_level(1);
+            PlaySound(exit_sound);
         } else if (level_index == 2 && player_score >= 120) {
             load_level(1);
+            PlaySound(exit_sound);
         } else if (level_index == 3 && player_score >= 190) {
             show_victory_screen();
             level_index = 0;

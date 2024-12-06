@@ -31,10 +31,10 @@ void derive_graphics_metrics_from_loaded_level() {
     shift_to_center.y = (screen_size.y - level_height) * 0.5f;
 }
 
-void draw_menu() {
-    draw_text(game_title);
-    draw_text(game_subtitle);
-}
+// void draw_menu() {
+//     draw_text(game_title);
+//     draw_text(game_subtitle);
+// }
 
 void draw_game_overlay() {
     Text score = {

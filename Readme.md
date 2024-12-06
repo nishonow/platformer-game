@@ -7,7 +7,7 @@ Simple Platformer
 
 * New Levels: Added 4 extra levels to the game.
 
-* New Game Elements: TODO
+* New Game Elements: Added traps
 
 * Next Level Screen: Added new screen to move to next level if player does not have enough coins programm load the same level untill player has enough coins.
 
@@ -49,6 +49,6 @@ Simple Platformer
 
 ### Tools
 
-* [Piskel](https://www.piskelapp.com)
+* [Pixabay](https://pixabay.com/)
 * [bfxr](https://www.bfxr.net)
 

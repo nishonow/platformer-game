@@ -12,6 +12,7 @@ void update_game() {
 
     // TODO
 
+
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
         move_player_horizontally(MOVEMENT_SPEED);
     }
@@ -39,12 +40,14 @@ void draw_game() {
 
 int main() {
     InitWindow(1024, 480, "Platformer");
+    SetExitKey(0);
     SetTargetFPS(60);
 
     load_fonts();
     load_images();
     load_sounds();
     load_level();
+
 
     while (!WindowShouldClose()) {
         BeginDrawing();
@@ -73,10 +76,18 @@ int main() {
             draw_text(how_to_play_title);
             draw_text(how_to_play_instructions);
             draw_text(how_to_play_back);
-        }
-        else if (game_state == GAME_STATE) {
+        } else if (game_state == PAUSE_STATE) {
+            ClearBackground(BLACK);
+            draw_pause_menu();
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                game_state = GAME_STATE;
+            }
+        } else if (game_state == GAME_STATE) {
             update_game();
             draw_game();
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                game_state = PAUSE_STATE;
+            }
         }
 
         EndDrawing();
