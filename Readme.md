@@ -2,14 +2,15 @@ Simple Platformer
 =================
 
 
-
-## Added elemts
+## Added elements
 
 * New Levels: Added 4 extra levels to the game.
 
-* New Game Elements: Added traps
+* New Game Elements: Added traps, player live
 
 * Next Level Screen: Added new screen to move to next level if player does not have enough coins programm load the same level untill player has enough coins.
+
+* New Game Over Screen: Added new Game Over Screen.
 
 * New Sounds: Added sounds such as death sound, victory sound.
 
@@ -50,5 +51,5 @@ Simple Platformer
 ### Tools
 
 * [Pixabay](https://pixabay.com/)
-* [bfxr](https://www.bfxr.net)
+
 
