@@ -302,7 +302,7 @@ Sound exit_sound;
 Sound music;
 Sound death_sound;
 Sound victory;
-
+Sound game_over;
 /* Victory Menu Background */
 
 struct victory_ball {

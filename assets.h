@@ -112,6 +112,7 @@ void load_sounds() {
     InitAudioDevice();
     victory = LoadSound("data/sounds/victory.mp3");
     music = LoadSound("data/musics/music.wav");
+    game_over = LoadSound("data/sounds/game_over.wav");
     coin_sound = LoadSound("data/sounds/coin.wav");
     exit_sound = LoadSound("data/sounds/exit.wav");
     death_sound = LoadSound("data/sounds/death.wav");

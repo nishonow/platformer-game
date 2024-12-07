@@ -45,7 +45,7 @@ void dead_screen() {
     draw_text(dead);
     EndDrawing();
     StopSound(music);
-    PlaySound(death_sound);
+    PlaySound(game_over);
 
     while (!IsKeyPressed(KEY_ENTER)) {
         BeginDrawing();
@@ -95,6 +95,9 @@ void update_player() {
 
     if (is_colliding(player_pos, TRAP)) {
         player_live -= 1;
+        if (player_live == 2 || player_live == 1) {
+            PlaySound(death_sound);
+        }
         if (is_colliding(player_pos, TRAP) && player_live == 0) {
             dead_screen();
         } else {
