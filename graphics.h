@@ -40,7 +40,12 @@ void draw_menu() {
 void draw_game_overlay() {
     Text score = {
         "Score " + std::to_string(player_score),
-        { 0.50f, 0.05f },
+        { 0.35f, 0.05f },
+        48.0f
+    };
+    Text lives = {
+        "Live " + std::to_string(player_live),
+        { 0.65f, 0.05f },
         48.0f
     };
     Text score_shadow = {
@@ -49,8 +54,8 @@ void draw_game_overlay() {
         48.0f,
         GRAY
     };
-
-    draw_text(score_shadow);
+    draw_text(lives);
+    //draw_text(score_shadow);
     draw_text(score);
 }
 

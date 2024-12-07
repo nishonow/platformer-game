@@ -163,6 +163,7 @@ float player_y_velocity = 0;
 bool is_player_on_ground;
 
 int player_score = 0;
+int player_live = 3;
 
 /* Graphic Metrics */
 

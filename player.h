@@ -57,6 +57,7 @@ void dead_screen() {
     level_index = 0;
     load_level(0);
     player_score = 0;
+    player_live = 3;
 }
 
 void show_victory_screen() {
@@ -79,6 +80,7 @@ void show_victory_screen() {
     game_state = MENU_STATE;
     level_index = 0;
     player_score = 0;
+    player_live = 3;
 }
 
 void update_player() {
@@ -92,7 +94,18 @@ void update_player() {
     }
 
     if (is_colliding(player_pos, TRAP)) {
-        dead_screen();
+        player_live -= 1;
+        if (is_colliding(player_pos, TRAP) && player_live == 0) {
+            dead_screen();
+        } else {
+            switch (level_index) {
+                case 0: player_score = 0; load_level(); break;
+                case 1: player_score = 10; load_level(); break;
+                case 2: player_score = 60; load_level(); break;
+                case 3: player_score = 120; load_level(); break;
+            }
+
+        }
     }
 
     if (is_colliding(player_pos, COIN)) {
