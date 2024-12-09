@@ -60,28 +60,28 @@ void dead_screen() {
     player_live = 3;
 }
 
-void show_victory_screen() {
-    create_victory_menu_background();
-    ClearBackground(BLACK);
-    draw_text(victory_title);
-    draw_text(victory_subtitle);
-    EndDrawing();
-    PlaySound(victory);
-
-    while (!IsKeyPressed(KEY_ENTER)) {
-        BeginDrawing();
-        ClearBackground(BLACK);
-        draw_victory_menu_background();
-        draw_victory_menu();
-        EndDrawing();
-        StopSound(music);
-    }
-
-    game_state = MENU_STATE;
-    level_index = 0;
-    player_score = 0;
-    player_live = 3;
-}
+// void show_victory_screen() {
+//     create_victory_menu_background();
+//     ClearBackground(BLACK);
+//     draw_text(victory_title);
+//     draw_text(victory_subtitle);
+//     EndDrawing();
+//     PlaySound(victory);
+//
+//     while (!IsKeyPressed(KEY_ENTER)) {
+//         BeginDrawing();
+//         ClearBackground(BLACK);
+//         draw_victory_menu_background();
+//         draw_victory_menu();
+//         EndDrawing();
+//         StopSound(music);
+//     }
+//
+//     game_state = MENU_STATE;
+//     level_index = 0;
+//     player_score = 0;
+//     player_live = 3;
+// }
 
 void update_player() {
     player_pos.y += player_y_velocity;
@@ -107,7 +107,6 @@ void update_player() {
                 case 2: player_score = 60; load_level(); break;
                 case 3: player_score = 120; load_level(); break;
             }
-
         }
     }
 
@@ -121,33 +120,55 @@ void update_player() {
     // }
 
     if (is_colliding(player_pos, EXIT)) {
-        if (level_index == 0 && player_score >= 10) {
-            load_level(1);
-            PlaySound(exit_sound);
-        } else if(level_index == 1 && player_score >= 60) {
-            load_level(1);
-            PlaySound(exit_sound);
-        } else if (level_index == 2 && player_score >= 120) {
-            load_level(1);
-            PlaySound(exit_sound);
-        } else if (level_index == 3 && player_score >= 190) {
-            load_level(1);
-            PlaySound(exit_sound);
-        } else if (level_index == 0 && player_score <= 10) {
-            show_not_enough_money_screen();
-            load_level();
-        } else if (level_index == 1 && player_score <= 60) {
-            show_not_enough_money_screen();
-            load_level();
-            player_score = 10;
-        } else if (level_index == 2 && player_score <= 120) {
-            show_not_enough_money_screen();
-            load_level();
-            player_score = 60;
-        } else if (level_index == 3 && player_score <= 190) {
-            show_not_enough_money_screen();
-            load_level();
-            player_score = 120;
+        switch (level_index) {
+            case 0:
+                if (player_score >= 10) {
+                    load_level(1);
+                    PlaySound(exit_sound);
+                } else {
+                    show_not_enough_money_screen();
+                    load_level();
+                }
+            break;
+            case 1:
+                if (player_score >= 60) {
+                    load_level(1);
+                    PlaySound(exit_sound);
+                } else {
+                    show_not_enough_money_screen();
+                    load_level();
+                    player_score = 10;
+                }
+            break;
+            case 2:
+                if (player_score >= 120) {
+                    load_level(1);
+                    PlaySound(exit_sound);
+                } else {
+                    show_not_enough_money_screen();
+                    load_level();
+                    player_score = 60;
+                }
+            break;
+            case 3:
+                if (player_score >= 200) {
+                    load_level(1);
+                    PlaySound(exit_sound);
+                } else {
+                    show_not_enough_money_screen();
+                    load_level();
+                    player_score = 120;
+                }
+            break;
+            case 4:
+                if (player_score >= 260) {
+                    load_level(1);
+                } else {
+                    show_not_enough_money_screen();
+                    load_level();
+                    player_score = 120;
+                }
+            break;
         }
     }
 }

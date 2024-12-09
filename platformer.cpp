@@ -13,7 +13,7 @@ void update_game()
 
     switch (game_state) {
     // TODO
-    case MENU_STATE:
+        case MENU_STATE:
         if (IsKeyPressed(KEY_H)) {
             game_state = HOW_STATE;
         }
@@ -22,7 +22,7 @@ void update_game()
             PlaySound(music);
         }
         break;
-    case GAME_STATE:
+        case GAME_STATE:
         if (IsKeyPressed(KEY_ESCAPE)) {
             game_state = PAUSE_STATE;
             StopSound(music);
@@ -44,7 +44,7 @@ void update_game()
         update_player();
         break;
 
-    case PAUSE_STATE:
+        case PAUSE_STATE:
         if (IsKeyDown(KEY_ESCAPE)) {
             game_state = PAUSE_STATE;
         }
@@ -54,14 +54,14 @@ void update_game()
         }
         break;
 
-    case VICTORY_STATE:
+        case VICTORY_STATE:
         StopSound(music);
         if (IsKeyPressed(KEY_ENTER)) {
             game_state = MENU_STATE;
             StopSound(music);
         }
         break;
-    case HOW_STATE:
+        case HOW_STATE:
         if (IsKeyPressed(KEY_B)) {
             game_state = MENU_STATE;
         }
@@ -90,6 +90,9 @@ void draw_game()
             break;
         case VICTORY_STATE:
             draw_victory_menu();
+            player_live = 3;
+            player_score = 0;
+            level_index = 0;
             break;
         case HOW_STATE:
             ClearBackground(BLACK);
@@ -102,7 +105,7 @@ void draw_game()
 
 int main()
 {
-    InitWindow(1024, 480, "Platformer");
+    InitWindow(1200, 600, "Platformer");
     SetExitKey(0);
     SetTargetFPS(60);
 
