@@ -17,6 +17,7 @@ void unload_fonts() {
 
 void load_images() {
     //spider_image = LoadTexture("data/images/spider.png");
+    menu_back = LoadTexture("data/images/menu_back.png");
     trap = LoadTexture("data/images/trap.png");
     wall_image    = LoadTexture("data/images/wall.png");
     air_image     = LoadTexture("data/images/air.png");

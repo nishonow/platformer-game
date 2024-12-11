@@ -267,6 +267,7 @@ Texture2D wall_image;
 Texture2D air_image;
 Texture2D exit_image;
 Texture2D trap;
+Texture2D menu_back;
 //Texture2D spider_image;
 
 struct sprite {

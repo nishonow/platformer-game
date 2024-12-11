@@ -1,6 +1,11 @@
 Simple Platformer
 =================
 
+<p align="center">
+  <img src="https://i.imgur.com/Ygx7ZgQ.png" alt="Game Screenshot" width="700">
+</p>
+
+
 
 ## Added elements
 

@@ -7,68 +7,64 @@
 #include "assets.h"
 #include "utilities.h"
 
-void update_game()
-{
+void update_game() {
     game_frame++;
 
     switch (game_state) {
-    // TODO
+        // TODO
         case MENU_STATE:
-        if (IsKeyPressed(KEY_H)) {
-            game_state = HOW_STATE;
-        }
-        if (IsKeyPressed(KEY_ENTER)) {
-            game_state = GAME_STATE;
-            PlaySound(music);
-        }
-        break;
+            if (IsKeyPressed(KEY_H)) {
+                game_state = HOW_STATE;
+            }
+            if (IsKeyPressed(KEY_ENTER)) {
+                game_state = GAME_STATE;
+                PlaySound(music);
+            }
+            break;
         case GAME_STATE:
-        if (IsKeyPressed(KEY_ESCAPE)) {
-            game_state = PAUSE_STATE;
-            StopSound(music);
-        }
-        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-            move_player_horizontally(MOVEMENT_SPEED);
-        }
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                game_state = PAUSE_STATE;
+                StopSound(music);
+            }
+            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+                move_player_horizontally(MOVEMENT_SPEED);
+            }
 
-        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
-            move_player_horizontally(-MOVEMENT_SPEED);
-        }
+            if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+                move_player_horizontally(-MOVEMENT_SPEED);
+            }
 
-        // Calculating collisions to decide whether the player is allowed to jump: don't want them to suction cup to the ceiling or jump midair
-        is_player_on_ground = is_colliding({player_pos.x, player_pos.y + 0.1f}, WALL);
-        if ((IsKeyDown(KEY_UP) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) && is_player_on_ground) {
-            player_y_velocity = -JUMP_STRENGTH;
-        }
+            // Calculating collisions to decide whether the player is allowed to jump: don't want them to suction cup to the ceiling or jump midair
+            is_player_on_ground = is_colliding({player_pos.x, player_pos.y + 0.1f}, WALL);
+            if ((IsKeyDown(KEY_UP) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) && is_player_on_ground) {
+                player_y_velocity = -JUMP_STRENGTH;
+            }
 
-        update_player();
-        break;
-
+            update_player();
+            break;
         case PAUSE_STATE:
-        if (IsKeyDown(KEY_ESCAPE)) {
-            game_state = PAUSE_STATE;
-        }
-        if (IsKeyPressed(KEY_ESCAPE)) {
-            game_state = GAME_STATE;
-            PlaySound(music);
-        }
-        break;
+            if (IsKeyDown(KEY_ESCAPE)) {
+                game_state = PAUSE_STATE;
+            }
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                game_state = GAME_STATE;
+                PlaySound(music);
+            }
+            break;
 
         case VICTORY_STATE:
-        StopSound(music);
+            StopSound(music);
         if (IsKeyPressed(KEY_ENTER)) {
             game_state = MENU_STATE;
             StopSound(music);
         }
-        break;
+            break;
         case HOW_STATE:
-        if (IsKeyPressed(KEY_B)) {
-            game_state = MENU_STATE;
-        }
-        break;
+            if (IsKeyPressed(KEY_B)) {
+                game_state = MENU_STATE;
+            }
+            break;
     }
-
-
 }
 
 void draw_game()
@@ -77,6 +73,7 @@ void draw_game()
         // TODO
         case MENU_STATE:
             ClearBackground(BLACK);
+            DrawTexture(menu_back, 0, 0, WHITE);
             draw_menu();
             break;
         case GAME_STATE:
