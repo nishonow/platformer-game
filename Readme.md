@@ -2,7 +2,7 @@ Simple Platformer
 =================
 
 <p align="center">
-  <img src="https://i.imgur.com/Ygx7ZgQ.png" alt="Game Screenshot" width="700">
+  <img src="https://i.imgur.com/UGrwiAa.png" alt="Game Screenshot" width="700">
 </p>
 
 
@@ -23,6 +23,67 @@ Simple Platformer
 
 * New Mechanics: TODO
 
+
+## Added codes
+* Background image of the screen using `DrawTexture` from raylib.
+```
+DrawTexture(menu_back, 0, 0, WHITE);
+```
+* Logic of moving to next level.
+```
+switch (level_index) {
+            case 0:
+                if (player_score >= 10) {
+                    load_level(1);
+                    PlaySound(exit_sound);
+                } else {
+                    show_not_enough_money_screen();
+                    load_level();
+                }
+            break;
+            case 1:
+                if (player_score >= 60) {
+                    load_level(1);
+                    PlaySound(exit_sound);
+                } else {
+                    show_not_enough_money_screen();
+                    load_level();
+                    player_score = 10;
+                }
+            break;
+            case 2:
+                if (player_score >= 120) {
+                    load_level(1);
+                    PlaySound(exit_sound);
+                } else {
+                    show_not_enough_money_screen();
+                    load_level();
+                    player_score = 60;
+                }
+            break;
+.....
+```
+
+* Logic for player live count
+
+```
+if (is_colliding(player_pos, TRAP)) {
+        player_live -= 1;
+        if (player_live == 2 || player_live == 1) {
+            PlaySound(death_sound);
+        }
+        if (is_colliding(player_pos, TRAP) && player_live == 0) {
+            dead_screen();
+        } else {
+            switch (level_index) {
+                case 0: player_score = 0; load_level(); break;
+                case 1: player_score = 10; load_level(); break;
+                case 2: player_score = 60; load_level(); break;
+                case 3: player_score = 120; load_level(); break;
+            }
+        }
+    }
+```
 
 ## Projecr structure: 
 
