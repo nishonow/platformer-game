@@ -51,6 +51,7 @@ void update_game() {
                 player_live = 3;
                 player_score = 0;
                 level_index = 0;
+                load_level(0);
             }
             break;
 
@@ -90,6 +91,7 @@ void draw_game()
             draw_victory_menu();
             player_live = 3;
             player_score = 0;
+            load_level(0);
             level_index = 0;
             break;
         case HOW_STATE:
