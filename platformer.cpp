@@ -11,7 +11,6 @@ void update_game() {
     game_frame++;
 
     switch (game_state) {
-        // TODO
         case MENU_STATE:
             if (IsKeyPressed(KEY_H)) {
                 game_state = HOW_STATE;
@@ -43,12 +42,15 @@ void update_game() {
             update_player();
             break;
         case PAUSE_STATE:
-            if (IsKeyDown(KEY_ESCAPE)) {
-                game_state = PAUSE_STATE;
-            }
             if (IsKeyPressed(KEY_ESCAPE)) {
                 game_state = GAME_STATE;
                 PlaySound(music);
+            }
+            if (IsKeyPressed(KEY_M)) {
+                game_state = MENU_STATE;
+                player_live = 3;
+                player_score = 0;
+                level_index = 0;
             }
             break;
 
@@ -70,7 +72,6 @@ void update_game() {
 void draw_game()
 {
     switch (game_state) {
-        // TODO
         case MENU_STATE:
             ClearBackground(BLACK);
             DrawTexture(menu_back, 0, 0, WHITE);
@@ -93,9 +94,7 @@ void draw_game()
             break;
         case HOW_STATE:
             ClearBackground(BLACK);
-            draw_text(how_to_play_title);
-            draw_text(how_to_play_instructions);
-            draw_text(how_to_play_back);
+            draw_how_menu();
             break;
     }
 }

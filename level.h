@@ -40,12 +40,9 @@ void load_level(int offset) {
     level_index += offset;
 
     if (level_index >= LEVEL_COUNT) {
-        // todo
         game_state = VICTORY_STATE;
-        PlaySound(victory);
         create_victory_menu_background();
-        level_index = 0;
-        player_score = 0;
+        PlaySound(victory);
         return;
     }
 

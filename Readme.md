@@ -11,9 +11,9 @@ Simple Platformer
 
 * New Levels: Added 4 extra levels to the game.
 
-* New Game Elements: Added traps, player live
+* New Game Elements: Added traps to decrease player life counts
 
-* Next Level Screen: Added new screen to move to next level if player does not have enough coins programm load the same level untill player has enough coins.
+* Next Level Screen: Added new screen to move to next level if player does not have enough coins game load the same level until player has enough coins.
 
 * New Game Over Screen: Added new Game Over Screen.
 
@@ -21,7 +21,7 @@ Simple Platformer
 
 * Music: Added new background music
 
-* New Mechanics: TODO
+* New Mechanics: Player live count
 
 
 ## Added codes
@@ -85,7 +85,7 @@ if (is_colliding(player_pos, TRAP)) {
     }
 ```
 
-## Projecr structure: 
+## Project structure: 
 
 ```
 .

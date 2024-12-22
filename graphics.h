@@ -37,6 +37,12 @@ void draw_menu() {
     draw_text(menu_option_how_to_play);
 }
 
+void draw_how_menu() {
+    draw_text(how_to_play_title);
+    draw_text(how_to_play_instructions);
+    draw_text(how_to_play_back);
+}
+
 void draw_game_overlay() {
     Text score = {
         "Score " + std::to_string(player_score),
@@ -83,6 +89,9 @@ void draw_level() {
                 case TRAP:
                     draw_image(trap, pos, cell_size);
                     break;
+                case KEY:
+                    draw_image(key, pos, cell_size);
+                    break;
             }
             // The second image layer
             switch (cell) {
@@ -111,7 +120,8 @@ void draw_player() {
 }
 
 void draw_pause_menu() {
-    draw_text(game_paused);
+    draw_text(pause);
+    draw_text(pause_back);
 }
 
 void create_victory_menu_background() {

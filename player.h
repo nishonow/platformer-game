@@ -118,6 +118,11 @@ void update_player() {
     // if (is_colliding(player_pos, EXIT)) {
     //     load_level(1);
     // }
+    if (is_colliding(player_pos, KEY)) {
+        get_collider(player_pos, KEY) = ' ';
+        player_score += 50;
+        PlaySound(coin_sound);
+    }
 
     if (is_colliding(player_pos, EXIT)) {
         switch (level_index) {
@@ -166,7 +171,7 @@ void update_player() {
                 } else {
                     show_not_enough_money_screen();
                     load_level();
-                    player_score = 120;
+                    player_score = 200;
                 }
             break;
         }

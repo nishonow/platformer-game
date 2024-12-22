@@ -16,15 +16,14 @@ void unload_fonts() {
 }
 
 void load_images() {
-    //spider_image = LoadTexture("data/images/spider.png");
     menu_back = LoadTexture("data/images/menu_back.png");
     trap = LoadTexture("data/images/trap.png");
+    key = LoadTexture("data/images/key.png");
     wall_image    = LoadTexture("data/images/wall.png");
     air_image     = LoadTexture("data/images/air.png");
     exit_image    = LoadTexture("data/images/exit.png");
     coin_sprite   = load_sprite("data/images/coin/coin",     ".png", 3, true, 18);
     player_sprite = load_sprite("data/images/player/player", ".png", 3, true, 10);
-    spider_sprite = load_sprite("data/images/player/player", ".png", 3, true, 10);
 }
 
 void unload_images() {
