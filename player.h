@@ -95,6 +95,10 @@ void update_player() {
 
     if (is_colliding(player_pos, TRAP)) {
         player_live -= 1;
+        if (player_live >= 3) {
+            load_level();
+            player_live = 2;
+        }
         if (player_live == 2 || player_live == 1) {
             PlaySound(death_sound);
         }
@@ -121,7 +125,8 @@ void update_player() {
     if (is_colliding(player_pos, KEY)) {
         get_collider(player_pos, KEY) = ' ';
         player_score += 50;
-        PlaySound(coin_sound);
+        player_live += 1;
+        PlaySound(star);
     }
 
     if (is_colliding(player_pos, EXIT)) {

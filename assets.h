@@ -18,7 +18,7 @@ void unload_fonts() {
 void load_images() {
     menu_back = LoadTexture("data/images/menu_back.png");
     trap = LoadTexture("data/images/trap.png");
-    key = LoadTexture("data/images/key.png");
+    key = LoadTexture("data/images/star.png");
     wall_image    = LoadTexture("data/images/wall.png");
     air_image     = LoadTexture("data/images/air.png");
     exit_image    = LoadTexture("data/images/exit.png");
@@ -110,6 +110,7 @@ void draw_sprite(sprite &sprite, Vector2 pos, float width, float height) {
 
 void load_sounds() {
     InitAudioDevice();
+    star = LoadSound("data/sounds/star.mp3");
     victory = LoadSound("data/sounds/victory.mp3");
     music = LoadSound("data/musics/music.wav");
     game_over = LoadSound("data/sounds/game_over.wav");
@@ -121,6 +122,11 @@ void load_sounds() {
 void unload_sounds() {
     UnloadSound(coin_sound);
     UnloadSound(exit_sound);
+    UnloadSound(music);
+    UnloadSound(death_sound);
+    UnloadSound(victory);
+    UnloadSound(game_over);
+    UnloadSound(star);
 }
 
 #endif // IMAGES_H
