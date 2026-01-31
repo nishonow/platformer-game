@@ -5,117 +5,74 @@ Simple Platformer
   <img src="https://i.imgur.com/UGrwiAa.png" alt="Game Screenshot" width="700">
 </p>
 
+## ✨ Overview
+A 2D platformer built with C++ and raylib. Navigate tile-based levels, collect coins and keys, avoid traps, and reach the exit to advance. The game includes multiple levels, lives, sound effects, and a victory screen.
 
+## 🎮 Features
+- 5 handcrafted levels with increasing difficulty
+- Coins, keys, and exits with score-based progression
+- Traps that reduce lives and reset progress
+- Menu, pause, how-to-play, and victory screens
+- Animated sprites and background music
 
-## Added elements
+## 🕹️ Controls
+- Move: Arrow keys or WASD
+- Jump: Up / W / Space
+- Start: Enter
+- Pause/Resume: Esc
+- How to Play: H
+- Back to Menu (from pause): M
+- Back (from help screen): B
 
-* New Levels: Added 4 extra levels to the game.
+## 🧩 Gameplay Rules
+- Collect coins to increase score.
+- Collect keys for a bonus and an extra life.
+- Reach the exit with enough score to unlock the next level.
+- Touching traps reduces lives; at 0 lives, the game ends.
 
-* New Game Elements: Added traps to decrease player life counts
+## 🧰 Tech Stack
+- C++17
+- raylib (graphics, input, audio)
+- CMake + vcpkg (dependencies)
 
-* Next Level Screen: Added new screen to move to next level if player does not have enough coins game load the same level until player has enough coins.
+## ⚙️ Build & Run (Windows)
+This project uses CMake and vcpkg with a manifest file.
 
-* New Game Over Screen: Added new Game Over Screen.
-
-* New Sounds: Added sounds such as death sound, victory sound.
-
-* Music: Added new background music
-
-* New Mechanics: Player live count
-
-
-## Added codes
-* Background image of the screen using `DrawTexture` from raylib.
+1) Install vcpkg and integrate it with CMake.
+2) Configure and build:
 ```
-DrawTexture(menu_back, 0, 0, WHITE);
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=<path_to_vcpkg>/scripts/buildsystems/vcpkg.cmake
+cmake --build build
 ```
-* Logic of moving to next level.
+3) Run the executable:
 ```
-switch (level_index) {
-            case 0:
-                if (player_score >= 10) {
-                    load_level(1);
-                    PlaySound(exit_sound);
-                } else {
-                    show_not_enough_money_screen();
-                    load_level();
-                }
-            break;
-            case 1:
-                if (player_score >= 60) {
-                    load_level(1);
-                    PlaySound(exit_sound);
-                } else {
-                    show_not_enough_money_screen();
-                    load_level();
-                    player_score = 10;
-                }
-            break;
-            case 2:
-                if (player_score >= 120) {
-                    load_level(1);
-                    PlaySound(exit_sound);
-                } else {
-                    show_not_enough_money_screen();
-                    load_level();
-                    player_score = 60;
-                }
-            break;
-.....
+./build/platformer.exe
 ```
 
-* Logic for player live count
-
-```
-if (is_colliding(player_pos, TRAP)) {
-        player_live -= 1;
-        if (player_live == 2 || player_live == 1) {
-            PlaySound(death_sound);
-        }
-        if (is_colliding(player_pos, TRAP) && player_live == 0) {
-            dead_screen();
-        } else {
-            switch (level_index) {
-                case 0: player_score = 0; load_level(); break;
-                case 1: player_score = 10; load_level(); break;
-                case 2: player_score = 60; load_level(); break;
-                case 3: player_score = 120; load_level(); break;
-            }
-        }
-    }
-```
-
-## Project structure: 
-
+## 📁 Project Structure
 ```
 .
-└── <repository>
-    ├── data
-    │   ├── fonts
-    │   │   └── ...
-    │   ├── images
-    │   │   └── ...
-    │   ├── music
-    │   │   └── ...
-    │   └── sounds
-    │       └── ...
-    ├── platformer.cpp
-    ├── globals.h
-    ├── <various header files>.h
-    ├── ... (.idea, .gitignore, CMakeLists.txt, other directories)
-    └── Readme.md
+├── data/
+│   ├── fonts/
+│   ├── images/
+│   ├── musics/
+│   └── sounds/
+├── platformer.cpp
+├── globals.h
+├── level.h
+├── player.h
+├── graphics.h
+├── assets.h
+├── utilities.h
+├── CMakeLists.txt
+└── vcpkg.json
 ```
 
-## Links
+## Credits & Tools
+- Engine: [raylib](https://www.raylib.com/)
+- Asset sources: [Pixabay](https://pixabay.com/)
 
-### raylib
-
-* [Wiki](https://github.com/raysan5/raylib/wiki)
-* [Cheatsheet](https://www.raylib.com/cheatsheet/cheatsheet.html)
-* [Examples](https://www.raylib.com/examples.html)
-
-### Tools
-
-* [Pixabay](https://pixabay.com/)
+---
+This README was generated by AI.
 
 
